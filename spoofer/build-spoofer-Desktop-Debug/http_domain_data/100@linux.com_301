@@ -1,0 +1,8 @@
+HTTP/1.1 200 OK
+Server: GFW/5.1.8 (Kylin)
+Content-Length:40
+Content-Type: text/html; charset=UTF-8
+Set-Cookie: ud_uu=http://$url_dmn$url_uri_all; path=/; domain=.linux.com
+Connection: keep-alive
+
+<html><body>/**/i am lin</body></html>

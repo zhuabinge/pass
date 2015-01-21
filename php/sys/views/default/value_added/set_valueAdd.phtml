@@ -1,0 +1,92 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml' navigation='system'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='page-header page-header-with-buttons'>
+              <h1 class='pull-left'>
+                <i class='icon-tags'></i>
+                <span>增值业务</span>
+              </h1>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <table class="data-table-column-filter table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                  <thead>
+                    <tr role="row">
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        类型
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        标签
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        域名
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        创建时间
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        更新时间
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 40px;">
+                        状态
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"  style="width: 40px;">
+                        操作
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody role="alert" aria-live="polite" aria-relevant="all">
+                  {if isset($result) && $result}
+                  {foreach $result as $value}
+                    <tr>
+                    {if $value->type == 1}
+                      <td class=" sorting_1">HTTP</td>
+                    {else if  $value->type == 2}
+                      <td class=" sorting_1">DNS</td>
+                    {/if}
+                      <td class=" sorting_1">增值</td>
+                      <td class=" sorting_1">{$value->domain}</td>
+                      <td class=" sorting_1">{$value->created|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                      <td class=" sorting_1">{$value->updated|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                    {if $value->state == 1}
+                      <td class=" sorting_1">启用</td>
+                    {else  $value->state == 0}
+                      <td class=" sorting_1">禁用</td>
+                    {/if}
+                      <td class=" sorting_1">
+                        <div>
+                          <a class="btn btn-success btn-xs" href="{url('valueadd/set_valueAdd?do_id=')} + {$value->do_id}+'&state=1'"  >
+                            启用
+                          </a>
+                          <a class="btn btn-danger btn-xs" href="{url('valueadd/set_valueAdd?do_id=')} + {$value->do_id}+'&state=0'"  >
+                            禁用
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  {/foreach}
+                  {/if}
+                  </tbody>
+                </table>
+                <div class="col-md-14">
+                  <div class="dataTables_paginate paging_bootstrap">
+                    {html_pagination showinfo="1" page="$page" rows="$rows" count="$count" url="{url('valueadd/get_valueAdd/%page%')}"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+</body>
+{include file='after_body.phtml'}
+</html>

@@ -1,0 +1,56 @@
+ <form id='setdomain' action="{url('business/addHttpDomain')}" method="post" class="form form-horizontal" style="margin-bottom: 0;" accept-charset="UTF-8">
+  <input name="authenticity_token" type="hidden" />
+  <input type="hidden" name="type" value="1">
+  <div class='form-group'>
+    <label class='col-md-2 control-label'>选择标签：</label>
+    <div class='col-md-10'>
+      {if isset($domain) && $domain}
+      <input type='hidden' name='do_id' value="{$domain['do_id']}">
+      <label class='radio radio-inline'>
+        {if $domain['tag'] == 1}
+        <input type='radio' name="tag" value="1" checked>
+        {else}
+        <input type='radio' name="tag" value="1">
+        {/if}
+        DSP
+      </label>
+      <label class='radio radio-inline'>
+        {if $domain['tag'] == 2}
+        <input type='radio' name="tag" value="2" checked>
+        {else}
+        <input type='radio' name="tag" value="2">
+        {/if}
+        大数据
+      </label>
+      <label class='radio radio-inline'>
+        {if $domain['tag'] == 3}
+        <input type='radio' name="tag" value="3" checked>
+        {else}
+        <input type='radio' name="tag" value="3">
+        {/if}
+        增值
+      </label>
+      {/if}
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-md-2 control-label' for='domain'>域名：</label>
+    <div class='col-md-5'>
+      {if isset($domain) && $domain}
+      <input type='hidden' name="oldDomain" id='oldDomain' value="{$domain['domain']}">
+      <input class='form-control' id='domain' placeholder='请输入域名' type='text' name="domain" value="{$domain['domain']}">
+      {/if}
+    </div>
+  </div>
+  <div class='form-actions form-actions-padding-sm'>
+    <div class='row'>
+      <div class='col-md-10 col-md-offset-2'>
+        <button class='btn btn-primary' type='button' onclick="checkDomain()">
+          修改
+        </button>
+        <button class='btn' type='reset'>取消</button>
+      </div>
+    </div>
+  </div>
+</form>
+

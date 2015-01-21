@@ -1,0 +1,79 @@
+<form id="manage" method="post" action="{url('interface/setInterface')}" class="form form-horizontal col-md-10 col-md-offset-1" style="margin-bottom: 0;" accept-charset="UTF-8">
+  <input name="authenticity_token" type="hidden" />
+  <input type="hidden" name="type" value="3">
+  <input type="hidden" name="inter_id" value="{$inter_id}">
+  {if isset($result2['ma_id'])}
+  <input type="hidden" name="ma_id" value="{$result2['ma_id']}">
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='ip'>IP：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="ip" id='ip' placeholder='IP' value="{$result2['ip']}" type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='mask'>mask：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="mask" id='mask' placeholder='mask' value="{$result2['mask']}"  type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='gateway'>gateway：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="gateway" id='gateway' placeholder='gateway' value="{$result2['gateway']}"  type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='dns1'>DNS1：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="dns1" id='dns1' placeholder='DNS1' value="{$result2['dns1']}"  type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='dns2'>DNS2：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="dns2" id='dns2' placeholder='DNS2' value="{$result2['dns2']}"  type='text'>
+    </div>
+  </div>
+  {else}
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='ip'>IP：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="ip" id='ip' placeholder='IP' type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='mask'>mask：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="mask" id='mask' placeholder='mask' type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='gateway'>gateway：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="gateway" id='gateway' placeholder='gateway' type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='dns1'>DNS1：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="dns1" id='dns1' placeholder='DNS1' type='text'>
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='dns2'>DNS2：</label>
+    <div class='col-sm-4'>
+      <input class='form-control' name="dns2" id='dns2' placeholder='DNS2' type='text'>
+    </div>
+  </div>
+  {/if}
+  <div class='form-actions form-actions-padding-sm'>
+    <div class='row'>
+      <div class='col-md-10 col-md-offset-2'>
+        <button class='btn btn-primary' type='button' onclick='valid()'>
+          修改
+        </button>
+        <button class='btn' type='reset'>取消</button>
+      </div>
+    </div>
+  </div>
+</form>

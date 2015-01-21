@@ -1,0 +1,26 @@
+index            index.php;
+
+if (!-e $request_filename) {
+  rewrite ^/(.*)$ /index.php?q=$1 last;
+}
+
+gzip on;
+gzip_min_length    1k;
+gzip_buffers       4 16k;
+gzip_http_version  1.0;
+gzip_comp_level    2;
+gzip_types         text/plain text/css application/xml application/x-javascript;
+gzip_disable       "MSIE [1-6]\.";
+
+expires          1h;
+location ~* \.(js|css|jpg|jpeg|gif|png|swf|ico)$ {
+  expires        7d;
+  log_not_found  off;
+  access_log     off;
+}
+
+location = /robots.txt {
+  allow          all;
+  log_not_found  off;
+  access_log     off;
+}

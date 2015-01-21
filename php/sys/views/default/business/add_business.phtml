@@ -1,0 +1,317 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml' navigation='system'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='page-header page-header-with-buttons'>
+              <h1 class='pull-left'>
+                <i class='icon-plus-sign'></i>
+                <span>添加业务</span>
+              </h1>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <button type='button' onclick="createDataFile()" class='btn btn-primary'>生成data文件</button>
+                <button type='button' onclick="createRuleFile()" class='btn btn-primary'>生成rule文件</a>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <div class='tabbable'>
+                  <ul class='nav nav-tabs'>
+                    <li class='active'>
+                      <a data-toggle='tab' href='#tabsimple1' >
+                        <i class='icon-bookmark'></i>
+                        HTTP
+                      </a>
+                    </li>
+                    <li>
+                      <a data-toggle='tab' href='#tabsimple2' >
+                        <i class='icon-bookmark'></i>
+                        DNS
+                      </a>
+                    </li>
+                  </ul>
+                  <div class='tab-content'>
+                    <div class='tab-pane active' id='tabsimple1'>
+                      <form id='setrule' action="{url('business/addHttpRule')}" class="form form-horizontal" style="margin-bottom: 0;" method="post" accept-charset="UTF-8">
+                        <input type='hidden' name='type' value='1'>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">domain:</label>
+                          <div class="col-md-5">
+                            <select name='do_id' class="form-control" onchange="getRule(this.value)">
+                              {if isset($domainset)}
+                              {foreach $domainset as $domains}
+                              <option value="{$domains['do_id']}">{$domains['domain']}</option>
+                              {/foreach}
+                              {/if}
+                            </select>
+                          </div>
+                          <div class="col-md-5">
+                            <a href="#modal-example1" data-toggle="modal" class="btn btn-xs btn btn-contrast has-tooltip add" data-placement="top" title data-original-title="添加新domain" style="margin:5px 0 0 5px;">
+                              <i class="icon-plus-sign"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">data-num:</label>
+                          <div class="col-md-5">
+                            <select class='form-control' >
+                              {if isset($http_data)}
+                              {foreach $http_data as $data}
+                              <option >{$data['data_num']}</option>
+                              {/foreach}
+                              {/if}
+                            </select>
+                          </div>
+                          <div class="col-md-5">
+                            <a href="#modal-example2" data-toggle="modal" class="btn btn-xs btn-contrast has-tooltip add" data-placement="top" title data-original-title="添加新data-num" style="margin:5px 0 0 5px;">
+                              <i class="icon-plus-sign"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-2 control-label">detail:</label>
+                          <div class='row'>
+                            <div class='col-md-9'>
+                              <div class='box bordered-box' style='margin-bottom:0;'>
+                                <div class='box-content box-no-padding'>
+                                  <div class='responsive-table' id="detail">
+
+
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top:15px;">
+                          <div class='col-md-10 col-md-offset-2'>
+                            <button class="btn-xs btn btn-contrast" id="addDetail">再加一项</button>
+                            <button class="btn-xs btn btn-danger" id="delDetail">删除</button>
+                          </div>
+                        </div>
+                      </form>
+                      <div class='form-actions form-actions-padding-sm'>
+                        <div class='row'>
+                          <div class='col-md-10 col-md-offset-2'>
+                            <button class='btn btn-primary' type='button' onclick='checkRule()'>添加</button>
+                            <button class='btn' type='reset'>取消</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class='tab-pane' id='tabsimple2'>
+                      test2
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="modal-example1" tabindex="-1" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">添加新domain</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form id='setdomain' action="{url('business/addHttpDomain')}" class="form" style="margin-bottom: 0;" method="post" accept-charset="UTF-8">
+                          <input name="authenticity_token" type="hidden">
+                          <input type='hidden' name='type' value='1'>
+                          <div class="form-group">
+                            <label>选择标签：</label>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tag" value="1" checked>dsp
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tag" value="2">大数据
+                              </label>
+                            </div>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="tag" value="3">增值
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label>域名：</label>
+                            <input class="form-control" type="text" placeholder="请输入域名" id="domain" name="domain">
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" onclick="checkDomain()">添加</button>
+                        <button class="btn btn-default" data-dismiss="modal" type="reset">取消</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal fade" id="modal-example2" tabindex="-1" aria-hidden="true" style="display: none;">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+                        <h4 class="modal-title">添加新data-num</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form id='setdata' action="{url('business/addHttpData')}" class="form" style="margin-bottom: 0;" method="post" accept-charset="UTF-8">
+                          <input name="authenticity_token" type="hidden">
+                          <input name="type" type="hidden" value="1">
+                          <div class="form-group">
+                            <label>选择domain:</label>
+                            <select name='do_id' class="form-control">
+                              {if isset($domainset)}
+                              {foreach $domainset as $domains}
+                              <option value="{$domains['do_id']}">{$domains['domain']}</option>
+                              {/foreach}
+                              {/if}
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label>data_num:</label>
+                            <input name="data_num" class='form-control' id='data_num' placeholder='请输入data_num' type='number'  min='1' >
+                          </div>
+                          <div class="form-group">
+                            <label>head:</label>
+                            <textarea name="head" class='form-control' id='head' placeholder='请输入head' rows='3'></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label>body:</label>
+                            <textarea name="body" class='form-control' id='body' placeholder='请输入body' rows='3'></textarea>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" onclick='checkDataNum()'>添加</button>
+                        <button class="btn btn-default" data-dismiss="modal" type="reset">取消</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+</body>
+{include file='after_body.phtml'}
+<script type="text/javascript">
+function checkDomain() {
+  var domain = document.getElementById('domain').value;
+  var flag = false;
+  if (domain == '') {
+    alert('domain不能为空.');
+  } else {
+    $.post('{url('business/get_HttpDomain')}', {}, function(data) {
+      for(i = 0; i< data.length; i++){
+        if (data[i].domain == domain){
+          alert('domain已存在，请输入其他domain.');
+          flag = true;
+        }
+      }
+      if (!flag) {
+        document.getElementById('setdomain').submit();
+      }
+    }, 'json');
+  }
+}
+
+function checkDataNum() {
+  var data_num = document.getElementById('data_num').value;
+  var head = document.getElementById('head').value;
+  var body = document.getElementById('body').value;
+  var flag = false;
+  if (head == '' || body == '') {
+    alert('head或者body不能为空.');
+  } else {
+    $.post('{url('business/get_HttpData')}', {}, function(data) {
+      for(i = 0; i< data.length; i++){
+        if (data[i].data_num == data_num){
+          alert('data_num已存在，请输入其他data_num.');
+          flag = true;
+          break;
+        }
+      }
+      if (!flag) {
+        document.getElementById('setdata').submit();
+      }
+    }, 'json');
+  }
+}
+
+function checkRule() {
+  var url = $('.url').val();
+  var cookies = $('.cookies').val();
+  var referer = $('.referer').val();
+  if (url == '' || cookies == '' || referer == '') {
+    alert('url或cookies或referer不能为空.');
+  } else {
+    for (i = 0; i <  $('.orders').length ; i++) {
+      var flag1 = false;
+      var flag2 = false;
+      for (j = i + 1; j <  $('.orders').length; j++) {
+        if ($('.orders')[i].value == $('.orders')[j].value) {
+          flag1 = true;
+          break;
+        }
+      }
+      if (flag1) {
+        flag2 = true;
+        break;
+      }
+    }
+    if (flag2) {
+      alert('order重复,请输入其他未被使用的order');
+    } else {
+      document.getElementById('setrule').submit();
+    }
+  }
+}
+
+function getRule(id) {
+  var url = "{url('business/getRule?do_id=')}" + id +'&range=1';
+  $('#detail').load(url);
+}
+getRule({$domainset[0]['do_id']})
+
+// function getPage(page) {
+//   var url = "{url('business/initView?page=')}" + page;
+//   $('#tabsimple3').load(url);
+// }
+// getPage(1);
+
+function createDataFile() {
+  $.post('{url('business/makeHttpDataFile')}', {}, function(data) {
+    if (data['success']) {
+      alert('生成data文件成功！');
+    } else {
+      alert('生成data文件失败！');
+    }
+  }, 'json');
+}
+
+function createRuleFile() {
+  $.post('{url('business/makeHttpRuleFile')}', {}, function(data) {
+    if (data['success']) {
+      alert('生成rule文件成功！');
+    } else {
+      alert('生成rule文件失败！');
+    }
+  }, 'json');
+}
+
+
+</script>
+</html>

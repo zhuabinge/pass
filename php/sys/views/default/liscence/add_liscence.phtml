@@ -1,0 +1,54 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml' navigation='system'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='page-header page-header-with-buttons'>
+              <h1 class='pull-left'>
+                <i class='icon-plus-sign'></i>
+                <span>添加授权信息</span>
+              </h1>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <form action="{url('liscence/addLiscence')}" method="post" class="form form-horizontal" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8">
+                  <input name="authenticity_token" type="hidden" />
+                  <div class='form-group'>
+                    <label class='col-md-2 control-label' for='inputTextArea1'>机器码：</label>
+                    <div class='col-md-5'>
+                      <textarea name="mc" class='form-control' id='inputTextArea1' rows='6' readonly="true">{$result}</textarea>
+                    </div>
+                  </div>
+                  <div class='form-group'>
+                    <label class='col-md-2 control-label' for='inputTextArea1'>Liscence：</label>
+                    <div class='col-md-5'>
+                      <textarea name="liscence" class='form-control' id='inputTextArea1' placeholder='请输入Liscence' rows='6'></textarea>
+                    </div>
+                  </div>
+                  <div class='form-actions form-actions-padding-sm'>
+                    <div class='row'>
+                      <div class='col-md-10 col-md-offset-2'>
+                        <button class='btn btn-primary' type='submit'>
+                          添加
+                        </button>
+                        <button class='btn' type='submit'>取消</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+
+</body>
+{include file='after_body.phtml'}
+</html>

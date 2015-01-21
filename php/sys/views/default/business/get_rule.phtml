@@ -1,0 +1,93 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='page-header page-header-with-buttons'>
+              <h1 class='pull-left'>
+                <i class='icon-tags'></i>
+                <span>全部规则</span>
+              </h1>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <table class="data-table-column-filter table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                  <thead>
+                    <tr role="row">
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        域名
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        url
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        cookies
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        referer
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        data-num
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        创建时间
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        更新时间
+                      </th>
+                      <!-- <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 40px;">
+                        状态
+                      </th> -->
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"  style="width: 40px;">
+                        操作
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    {if isset($http_rule) && $http_rule}
+                    {foreach $http_rule as $value}
+                    <tr>
+                      <td class=" sorting_1">{$value['domain']}</td>
+                      <td class=" sorting_1">{$value['url']}</td>
+                      <td class=" sorting_1">{$value['cookies']}</td>
+                      <td class=" sorting_1">{$value['referer']}</td>
+                      <td class=" sorting_1">
+                        <a href="{url('business/getRule?do_id=0&data_num='|cat:{$value['data_num']}|cat:'&range=3')}"  style="text-decoration:underline;">{$value['data_num']}</a>
+                      </td>
+                      <td class=" sorting_1">{$value['created']|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                      <td class=" sorting_1">{$value['updated']|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                      <td class=" sorting_1">
+                        <div>
+                          <a class="btn btn-success btn-xs" href="{url('business/modify_HttpRule?rule_id='|cat:{$value['rule_id']}|cat:'&do_id='|cat:{$value['do_id']})}"  >
+                            编辑
+                          </a>
+                          <a class="btn btn-danger btn-xs" href="{url('business/del_rule?rule_id='|cat:{$value['rule_id']})}"  >
+                            删除
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    {/foreach}
+                    {/if}
+                  </tbody>
+                </table>
+                <div class="col-md-14">
+                  <div class="dataTables_paginate paging_bootstrap">
+                    {html_pagination showinfo="1" page="$page" rows="$rows" count="$count" url="{url('business/getRule/%page%?do_id='|cat:$do_id|cat:'&range=2')}"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+</body>
+{include file='after_body.phtml'}
+</html>

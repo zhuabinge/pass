@@ -1,0 +1,121 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='page-header page-header-with-buttons'>
+              <h1 class='pull-left'>
+                <i class='icon-tags'></i>
+                <span>接口设置</span>
+              </h1>
+            </div>
+            <div class='row'>
+              <div class='col-xs-5'>
+                <button type='button' onclick='createInterfaceFile()' class='btn btn-primary'>生成config文件</button>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <div class='tabbable'>
+                  <ul class='nav nav-tabs'>
+                    {foreach from=$result item=value name=foo}
+                    {if $smarty.foreach.foo.first}
+                    <li class='active'>
+                      <a data-toggle='tab' href="#tabData" onclick="getData('{$value->name}')">
+                        <i class='icon-bookmark'></i>
+                        {$value->name}
+                      </a>
+                    </li>
+                    {else}
+                    <li>
+                      <a data-toggle='tab' href="#tabData" onclick="getData('{$value->name}')">
+                        <i class='icon-bookmark'></i>
+                        {$value->name}
+                      </a>
+                    </li>
+                    {/if}
+                    {/foreach}
+                  </ul>
+                  <div class='tab-content'>
+                    <div class='tab-pane' id='tabData' style="display:block;">
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+</body>
+{include file='after_body.phtml'}
+<script type="text/javascript">
+function getData(value) {
+  var url = "{url('interface/getInterfaceByName?name=')}" + value;
+  $('#tabData').load(url);
+}
+getData('eth1');
+
+function getPage(page, type, inter_id) {
+  //var url = "{url('interface/getInterfaceView?page=')}" + page;
+  //$('#test1').load(url);
+  $.ajax({
+    url: 'interface/getInterfaceView',
+    type: 'POST',
+    data: { page: page, type:  type, inter_id: inter_id},
+    datatype: 'json',
+    success: function(data){
+      $('#test1').html(data);
+    }
+  });
+}
+
+function valid() {
+  var ip = document.getElementById('ip').value;
+  var mask = document.getElementById('mask').value;
+  var gateway = document.getElementById('gateway').value;
+  var dns1 = document.getElementById('dns1').value;
+  var dns2 = document.getElementById('dns2').value;
+  if(check(ip) && check(mask) && check(gateway) && check(dns1) && check(dns2)){
+    document.getElementById('manage').submit();
+  }else{
+    alert('输入的数据格式错误，请重新输入！');
+  }
+}
+
+function check(temp) {
+  var reSpaceCheck = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/;
+  if (reSpaceCheck.test(temp)){
+    temp.match(reSpaceCheck);
+    if (RegExp.$1<=255&&RegExp.$1>=0
+      &&RegExp.$2<=255&&RegExp.$2>=0
+      &&RegExp.$3<=255&&RegExp.$3>=0
+      &&RegExp.$4<=255&&RegExp.$4>=0){
+      return true;
+    }else{
+      return false;
+    }
+  }else{
+    return false;
+  }
+}
+
+function createInterfaceFile() {
+  $.post("{url('interface/makeInterfaceFile')}", {}, function(data) {
+    if (data['success']) {
+      alert('生成config文件成功！');
+    } else {
+      alert('生成config文件失败！');
+    }
+  }, 'json');
+}
+</script>
+</html>

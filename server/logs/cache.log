@@ -1,0 +1,2 @@
+[2015-01-14 16:12:08.144] [ERROR] Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED
+[2015-01-14 16:12:52.397] [ERROR] Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED

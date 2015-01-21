@@ -1,0 +1,128 @@
+<table id="dataTable1" class='data-table-column-filter table table-striped' style='margin-bottom:0;'>
+  <thead >
+    <tr>
+      <th class="only-checkbox">
+        <input class="check-all" type="checkbox">
+      </th>
+      <th>data_num</th>
+      <th>order</th>
+      <th>url</th>
+      <th>cookies</th>
+      <th>referer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {if isset($http_rule) && $http_rule}
+    <input type="hidden" name="location" value="{count($http_rule)}">
+    {foreach $http_rule as $rule}
+    <tr>
+      <td class="only-checkbox">
+        <input type="checkbox" value="{$rule['rule_id']}">
+        <input type="hidden" name="rule_id[]" value="{$rule['rule_id']}">
+      </td>
+      <td>
+        <select name='data_num[]' class='form-control' >
+          {if isset($http_data)}
+          {foreach $http_data as $data}
+          {if $rule['data_num'] == $data['data_num']}
+          <option  value="{$data['data_num']}" selected>{$data['data_num']}</option>
+          {else}
+          <option  value="{$data['data_num']}">{$data['data_num']}</option>
+          {/if}
+          {/foreach}
+          {/if}
+        </select>
+      </td>
+      <td class="col-xs-2">
+        <input name="orders[]" class='form-control orders' placeholder='请输入order' type='number'  min='1' value="{$rule['orders']}">
+      </td>
+      <td class="col-xs-3">
+        <input name="url[]" class='form-control url' placeholder='请输入url' type='text' value="{$rule['url']}">
+      </td>
+      <td class="col-xs-3">
+        <input name="cookies[]" class='form-control cookies' placeholder='请输入cookies' type='text' value="{$rule['cookies']}">
+      </td>
+      <td class="col-xs-3">
+        <input name="referer[]" class="form-control referer" type="text" placeholder="请输入referer" value="{$rule['referer']}">
+      </td>
+    </tr>
+    {/foreach}
+    {else}
+    <tr>
+      <input type="hidden" name="location" value="1">
+      <td class="only-checkbox">
+        <input type="checkbox" >
+      </td>
+      <td>
+        <select name='data_num[]' class='form-control' >
+          {if isset($http_data)}
+          {foreach $http_data as $data}
+          <option  value="{$data['data_num']}">{$data['data_num']}</option>
+          {/foreach}
+          {/if}
+        </select>
+      </td>
+      <td class="col-xs-2">
+        <input name="orders[]" class='form-control orders' placeholder='请输入order' type='number'  min='1'>
+      </td>
+      <td class="col-xs-3">
+        <input name="url[]" class='form-control url' placeholder='请输入url' type='text'>
+      </td>
+      <td class="col-xs-3">
+        <input name="cookies[]" class='form-control cookies' placeholder='请输入cookies' type='text'>
+      </td>
+      <td class="col-xs-3">
+        <input name="referer[]" class="form-control referer" type="text" placeholder="请输入referer">
+      </td>
+    </tr>
+    {/if}
+    <tr class="simple-tr" style="display:none;">
+      <td class="only-checkbox">
+        <input type="checkbox">
+      </td>
+      <td>
+        <select name='data_num[]' class='form-control' >
+          {if isset($http_data)}
+          {foreach $http_data as $data}
+          <option  value="{$data['data_num']}">{$data['data_num']}</option>
+          {/foreach}
+          {/if}
+        </select>
+      </td>
+      <td class="col-xs-2">
+        <input name="orders[]" class='form-control orders' placeholder='请输入order' type='number'  min='1' >
+      </td>
+      <td class="col-xs-3">
+        <input name="url[]" class='form-control url' placeholder='请输入url' type='text'>
+      </td>
+      <td class="col-xs-3">
+        <input name="cookies[]" class='form-control cookies' placeholder='请输入cookies' type='text'>
+      </td>
+      <td class="col-xs-3">
+        <input name="referer[]" class="form-control referer" type="text" placeholder="请输入referer">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  /**表格增加行和删除行**/
+  var dataSource = $('#dataTable1 .simple-tr').html();
+  $('#addDetail').click(function() {
+    $('#dataTable1 tbody').append('<tr>' + dataSource + '</tr>');
+    return false;
+  });
+
+  $('#delDetail').click(function() {
+    var check = $('#dataTable1 tbody td.only-checkbox input:checked');
+    for (var i = 0; i < check.length; i++) {
+      $.get("{url('business/del_rule?rule_id=')}" + check[i].value, {}, function(data) {
+        console.log(data);
+      }, 'json');
+    }
+    $('#dataTable1 tbody td.only-checkbox input:checked').parent('td').parent('tr').remove();
+    return false;
+  });
+});
+</script>

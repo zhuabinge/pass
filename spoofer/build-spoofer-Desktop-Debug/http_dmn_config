@@ -1,0 +1,56 @@
+<spo_domain www.vip.com>
+  url: ^\/detail-([0-9]+)-([0-9]+)\.html,,,cookies: ,,,referer: !zhitui,,,@1
+</spo_domain>
+
+<spo_domain product.dangdang.com>
+  url: ^\/([0-9]+\.html),,,cookies: ,,,referer: !union.dangdang.com,,,@2
+</spo_domain>
+
+<spo_domain item.yhd.com>
+	url: /^/item/[0-9]+\??/,,,cookies: !/(unionKey|ss=sss)/,,,referer: ,,,@3
+</spo_domain>
+
+<spo_domain pop.jumei.com>
+  url: ^\/i\/deal\/(.*)\.html\??,,,cookies: ,,,referer: !zhitui,,,@4
+</spo_domain>
+
+<spo_domain t.dianping.com>
+  url: ^\/deal\/.*,,,cookies: !(lpn|ss=sss),,,referer: ,,,@5
+</spo_domain>
+
+<spo_domain www.gome.com.cn>
+  url: ^\/product\/.*,,,cookies: ,,,referer: !zhitui,,,@6
+</spo_domain>
+
+<spo_domain product.lefeng.com>
+  url: ^\/product\/([0-9]+)\.html,,,cookies: ,,,referer: !zhitui,,,@7
+</spo_domain>
+
+<spo_domain www.yougou.com>
+  url: ^\/(.+)\/(.+)\.shtml(.*)$,,,cookies: ,,,referer: !zhitui,,,@8
+</spo_domain>
+
+<spo_domain item.mi.com>
+  url: ,,,cookies: ,,,referer: !union,,,@9
+</spo_domain>
+
+<spo_domain shop.mogujie.com>
+  url: \/detail\/.+,,,cookies: ,,,referer: !feedback,,,@11
+</spo_domain>
+
+<spo_domain www.qq.com>
+	url: ,,,cookies: ,,,referer: ,,,@80
+</spo_domain>
+
+<spo_domain www.163.com>
+	url: ,,,cookies: ,,,referer: ,,,@60
+</spo_domain>
+
+<spo_domain www.linux.com>
+	url: ,,,cookies: ,,,referer: ,,,@100
+</spo_domain>
+
+
+
+
+

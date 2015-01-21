@@ -1,0 +1,46 @@
+cmd_Release/obj.target/mysql_bindings/src/mysql_bindings.o := g++ '-D_LARGEFILE_SOURCE' '-D_FILE_OFFSET_BITS=64' '-DBUILDING_NODE_EXTENSION' -I/home/bingo/.node-gyp/0.10.35/src -I/home/bingo/.node-gyp/0.10.35/deps/uv/include -I/home/bingo/.node-gyp/0.10.35/deps/v8/include -I../node_modules/nan  -fPIC -Wall -Wextra -Wno-unused-parameter -pthread -m64 -I/usr/include/mysql -DBIG_JOINS=1 -fno-strict-aliasing -g -DNDEBUG -O2 -fno-strict-aliasing -fno-tree-vrp -fno-omit-frame-pointer -fno-rtti -fno-exceptions -MMD -MF ./Release/.deps/Release/obj.target/mysql_bindings/src/mysql_bindings.o.d.raw  -c -o Release/obj.target/mysql_bindings/src/mysql_bindings.o ../src/mysql_bindings.cc
+Release/obj.target/mysql_bindings/src/mysql_bindings.o: \
+ ../src/mysql_bindings.cc /home/bingo/.node-gyp/0.10.35/src/node.h \
+ /home/bingo/.node-gyp/0.10.35/deps/uv/include/uv.h \
+ /home/bingo/.node-gyp/0.10.35/deps/uv/include/uv-private/uv-unix.h \
+ /home/bingo/.node-gyp/0.10.35/deps/uv/include/uv-private/ngx-queue.h \
+ /home/bingo/.node-gyp/0.10.35/deps/uv/include/uv-private/uv-linux.h \
+ /home/bingo/.node-gyp/0.10.35/deps/v8/include/v8.h \
+ /home/bingo/.node-gyp/0.10.35/deps/v8/include/v8stdint.h \
+ /home/bingo/.node-gyp/0.10.35/src/node_object_wrap.h \
+ /home/bingo/.node-gyp/0.10.35/src/node.h \
+ ../src/./mysql_bindings_connection.h /usr/include/mysql/mysql.h \
+ /usr/include/mysql/mysql_version.h /usr/include/mysql/mysql_com.h \
+ /usr/include/mysql/mysql_time.h /usr/include/mysql/my_list.h \
+ /usr/include/mysql/typelib.h /usr/include/mysql/my_alloc.h \
+ ../src/././mysql_bindings.h \
+ /home/bingo/.node-gyp/0.10.35/src/node_buffer.h \
+ ../node_modules/nan/nan.h \
+ /home/bingo/.node-gyp/0.10.35/src/node_version.h \
+ /home/bingo/.node-gyp/0.10.35/src/node_object_wrap.h \
+ ../src/./mysql_bindings_result.h ../src/./mysql_bindings_statement.h
+../src/mysql_bindings.cc:
+/home/bingo/.node-gyp/0.10.35/src/node.h:
+/home/bingo/.node-gyp/0.10.35/deps/uv/include/uv.h:
+/home/bingo/.node-gyp/0.10.35/deps/uv/include/uv-private/uv-unix.h:
+/home/bingo/.node-gyp/0.10.35/deps/uv/include/uv-private/ngx-queue.h:
+/home/bingo/.node-gyp/0.10.35/deps/uv/include/uv-private/uv-linux.h:
+/home/bingo/.node-gyp/0.10.35/deps/v8/include/v8.h:
+/home/bingo/.node-gyp/0.10.35/deps/v8/include/v8stdint.h:
+/home/bingo/.node-gyp/0.10.35/src/node_object_wrap.h:
+/home/bingo/.node-gyp/0.10.35/src/node.h:
+../src/./mysql_bindings_connection.h:
+/usr/include/mysql/mysql.h:
+/usr/include/mysql/mysql_version.h:
+/usr/include/mysql/mysql_com.h:
+/usr/include/mysql/mysql_time.h:
+/usr/include/mysql/my_list.h:
+/usr/include/mysql/typelib.h:
+/usr/include/mysql/my_alloc.h:
+../src/././mysql_bindings.h:
+/home/bingo/.node-gyp/0.10.35/src/node_buffer.h:
+../node_modules/nan/nan.h:
+/home/bingo/.node-gyp/0.10.35/src/node_version.h:
+/home/bingo/.node-gyp/0.10.35/src/node_object_wrap.h:
+../src/./mysql_bindings_result.h:
+../src/./mysql_bindings_statement.h:

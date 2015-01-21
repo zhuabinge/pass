@@ -1,0 +1,7 @@
+www.baidu.com,0,0,123456,789456
+www.qq.com,0,0,789456,123456
+www.sina.com,0,0,456123,456789
+www.iciba.com,0,0,456789,456123
+www.android.com,0,0,101010,706642
+www.ttgg.com,0,0,124266,749866
+www.vip.com,0,0,852185,468663

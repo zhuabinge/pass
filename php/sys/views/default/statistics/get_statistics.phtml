@@ -1,0 +1,75 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml' navigation='system'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='page-header page-header-with-buttons'>
+              <h1 class='pull-left'>
+                <i class='icon-tags'></i>
+                <span>统计中心</span>
+              </h1>
+            </div>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <table class="data-table-column-filter table table-bordered table-striped dataTable" style="margin-bottom:0;" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                  <thead>
+                    <tr role="row">
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        域名
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        标签1
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        标签2
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        标签3
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        标签4
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        创建时间
+                      </th>
+                      <th role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 80px;">
+                        更新时间
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody role="alert" aria-live="polite" aria-relevant="all">
+                  {if isset($result) && $result}
+                  {foreach $result as $value}
+                    <tr>
+                      <td class=" sorting_1">{$value->domain}</td>
+                      <td class=" sorting_1">{$value->tag1}</td>
+                      <td class=" sorting_1">{$value->tag2}</td>
+                      <td class=" sorting_1">{$value->tag3}</td>
+                      <td class=" sorting_1">{$value->tag4}</td>
+                      <td class=" sorting_1">{$value->created|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                      <td class=" sorting_1">{$value->updated|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                    </tr>
+                  {/foreach}
+                  {/if}
+                  </tbody>
+                </table>
+                <div class="col-md-14">
+                  <div class="dataTables_paginate paging_bootstrap">
+                    {html_pagination showinfo="1" page="$page" rows="$rows" count="$count" url="{url('statistics/get_statistics/%page%')}"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+</body>
+{include file='after_body.phtml'}
+</html>

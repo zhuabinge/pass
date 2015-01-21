@@ -1,0 +1,11 @@
+{
+  "name": "Bodao-Service",
+  "dependencies": {
+    "restify": "*",
+    "mysql-libmysqlclient": "*",
+    "redis": "*",
+    "mime": "*",
+    "request": "*",
+    "iconv-lite": "*"
+  }
+}

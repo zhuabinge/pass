@@ -1,0 +1,146 @@
+<form method="post" action="{url('interface/setInterface')}" class="form form-horizontal col-md-10 col-md-offset-1" style="margin-bottom: 0;" accept-charset="UTF-8">
+  <input name="authenticity_token" type="hidden" />
+  <input type="hidden" name="type" value="2">
+  <input type="hidden" name="inter_id" value="{$inter_id}">
+  <div class='form-group'>
+    <label class='col-sm-2 control-label'>方式：</label>
+    <div class='col-sm-4 controls'>
+      {if isset($result2['in_id'])}
+      <input type="hidden" name="in_id" value="{$result2['in_id']}">
+      {/if}
+      {if isset($result2['type1'])}
+      {if $result2['type1'][0] == '1'}
+      <label class="checkbox-inline">
+        <input name='type1[]'  value="1" type='checkbox' checked>HTTP
+      </label>
+      {else}
+      <label class="checkbox-inline">
+        <input name='type1[]'  value="1" type='checkbox'>HTTP
+      </label>
+      {/if}
+      {if $result2['type1'][1] == '2'}
+      <label class="checkbox-inline">
+        <input name='type1[]'  value="2" type='checkbox' checked>DNS
+      </label>
+      {else}
+      <label class="checkbox-inline">
+        <input name='type1[]'  value="2" type='checkbox'>DNS
+      </label>
+      {/if}
+      {else}
+      <label class="checkbox-inline">
+        <input  name='type1[]'  value="1" type='checkbox' >HTTP
+      </label>
+      <label class="checkbox-inline">
+        <input name='type1[]'  value="2" type='checkbox'>DNS
+      </label>
+      {/if}
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label'>analysiser：</label>
+    <div class='col-sm-4 controls'>
+      <input class='form-control' name="analysiser" id='analysiser' placeholder='analysiser' type='number' min='1' max='8' value="{$result2['analysiser']|default:1}">
+    </div>
+  </div>
+  <div class='form-group'>
+    <label class='col-sm-2 control-label'>类型：</label>
+    <div class='col-sm-4 controls'>
+      {if isset($result2['type2'] )}
+      {if $result2['type2'] == '1'}
+      <div class="radio">
+        <input id="radio1" name='type2' value="1" type='radio' checked>pcap
+      </div>
+      {else}
+      <div class="radio">
+        <input id="radio1" name='type2' value="1" type='radio'>pcap
+      </div>
+      {/if}
+      {if $result2['type2'] == '2'}
+      <label class="radio radio-inline">
+        <input id="radio2" name='type2' value="2" type='radio' checked>pf
+      </label>
+      {else}
+      <label class="radio radio-inline">
+        <input id="radio2" name='type2' value="2" type='radio'>pf
+      </label>
+      {/if}
+      {else}
+      <div class="radio">
+        <input id="radio1" name='type2' value="1" type='radio' checked>pcap
+      </div>
+      <label class="radio radio-inline">
+        <input id="radio2" name='type2' value="2" type='radio'>pf
+      </label>
+      {/if}
+      {if isset($result2['type3'])}
+      {if $result2['type3'][0] == '1'}
+      <label class="radio radio-inline">
+        <input class="box1" name='type3'  value="1" type='radio'  disabled="disabled" checked>rx
+      </label>
+      {else}
+      <label class="radio radio-inline">
+        <input class="box1" name='type3'  value="1" type='radio'  disabled="disabled">rx
+      </label>
+      {/if}
+      {if $result2['type3'][1] == '2'}
+      <label class="radio radio-inline">
+        <input class="box1" name='type3'  value="2" type='radio' disabled="disabled" checked>tx
+      </label>
+      {else}
+      <label class="radio radio-inline">
+        <input class="box1" name='type3'  value="2" type='radio' disabled="disabled">tx
+      </label>
+      {/if}
+      {else}
+      <label class="radio radio-inline">
+        <input class="box1" name='type3'  value="1" type='radio'  disabled="disabled" checked>rx
+      </label>
+      <label class="radio radio-inline">
+        <input class="box1" name='type3'  value="2" type='radio' disabled="disabled">tx
+      </label>
+      {/if}
+    </div>
+  </div>
+  <input type='hidden' id='old_inter_id2' name='old_inter_id2' value="{$result2['inter_id2']|default:0}">
+  <div class='form-group'>
+    <label class='col-sm-2 control-label' for='out_num'>发包口：</label>
+    <div class='col-sm-4 controls'>
+      <select class="form-control" name='inter_id2'>
+        {foreach $result2['inter_id_set'] as $value}
+        {if $value['inter_id'] == $result2['inter_id2']}
+        <option  value="{$value['inter_id']}" selected>{$value['name']}</option>
+        {else}
+        <option value="{$value['inter_id']}">{$value['name']}</option>
+        {/if}
+        {/foreach}
+      </select>
+    </div>
+  </div>
+  <div class='form-actions form-actions-padding-sm'>
+    <div class='row'>
+      <div class='col-md-10 col-md-offset-2'>
+        <button class='btn btn-primary' type='submit'>
+          保存<!--并生成配置文件-->
+        </button>
+        <button class='btn' type='submit'>取消</button>
+      </div>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+$(document).ready(function() {
+  if( $('#radio2').is(':checked') ) {
+      $('.box1').removeAttr('disabled');
+  }
+  $('#radio2').click(function() {
+    if( $('#radio2').is(':checked') ) {
+      $('.box1').removeAttr('disabled');
+    }
+  });
+  $('#radio1').click(function() {
+    $('.box1').attr({ 'disabled':'disabled'}).removeAttr('checked');
+  });
+
+});
+</script>

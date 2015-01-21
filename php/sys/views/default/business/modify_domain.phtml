@@ -1,0 +1,73 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml' navigation='system'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <div class='box'>
+                  <div class='box-header'>
+                    <div class='title'>
+                      <div class='icon-edit'></div>
+                      修改Domain
+                    </div>
+                    <div class='actions'>
+                      <a class="btn box-remove btn-xs btn-link" href=""><i class='icon-remove'></i>
+                      </a>
+                      <a class="btn box-collapse btn-xs btn-link" href=""><i></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class='box-content' id="modify" style="display:block">
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {include file='footer.phtml'}
+      </div>
+    </section>
+  </div>
+</body>
+{include file='after_body.phtml'}
+<script type="text/javascript">
+function loadView(view)
+{
+  $('#modify').load(view);
+}
+loadView("{url('business/getHttpDomainById?do_id='|cat:{$set['do_id']})}");
+
+function checkDomain() {
+  var domain = document.getElementById('domain').value;
+  var oldDomain = document.getElementById('oldDomain').value;
+  var flag = false;
+  if (domain == '') {
+    alert('domain不能为空.');
+  } else {
+    if (oldDomain != domain) {
+      $.post('{url('business/get_HttpDomain')}', {}, function(data) {
+        for(i = 0; i< data.length; i++){
+          if (data[i].domain == domain){
+            alert('domain已存在，请输入其他domain.');
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) {
+          document.getElementById('setdomain').submit();
+        }
+      }, 'json');
+    } else {
+      document.getElementById('setdomain').submit();
+    }
+  }
+}
+</script>
+</html>

@@ -1,0 +1,150 @@
+max_dns_pkt_size 2048
+max_http_pkt_size 8192
+max_send_size 16K
+max_log_len 512
+dns_dmn_data_path dns_domain_data
+http_dmn_cfg_file http_dmn_config
+http_dmn_data_path http_domain_data	##jfsjfjjkjk
+log_file spoofer_log.log
+statis_file spoofer_statis.log
+
+<spo_hp_method>
+	method GET
+</spo_hp_method>
+
+<spo_sniffer>
+	dev_r eth1
+	filter tcp or udp
+	useing_lib pcap ##pcap or pf
+	data_direc tx
+	http_msgid 12345690
+	http_msgid 12345691
+	http_msgid 12345692
+	http_msgid 12345693
+	http_msgid 12345695
+	http_msgid 12345696
+	http_msgid 12345697
+	
+	dns_msgid 22345690
+	proc_type sniffer
+	cpuid 1
+</spo_sniffer>
+
+
+<spo_dns_spoofer>
+	rcv_msgid 22345690
+	snd_msgid 1234560
+	snd_msgid 1234561
+	proc_type dns_spoofer
+	cpuid 2
+</spo_spoofer>
+
+
+<spo_http_spoofer>
+	rcv_msgid 12345690
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345691
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345692
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345693
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345694
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345695
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345696
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+<spo_http_spoofer>
+	rcv_msgid 12345697
+	snd_msgid 1234560
+	snd_msgid 1234561
+	snd_msgid 1234562
+	snd_msgid 1234563
+	proc_type http_spoofer
+	cpuid 3
+</spo_spoofer>
+
+
+<spo_sender>
+	dev_s eth1
+	rcv_msgid 1234560
+	cpuid 7
+	proc_type sender
+</spo_sender>
+
+<spo_sender>
+	dev_s eth1
+	rcv_msgid 1234561
+	cpuid 7
+	proc_type sender
+</spo_sender>
+
+<spo_sender>
+	dev_s eth1
+	rcv_msgid 1234562
+	cpuid 7
+	proc_type sender
+</spo_sender>
+
+<spo_sender>
+	dev_s eth1
+	rcv_msgid 1234563
+	cpuid 7
+	proc_type sender
+</spo_sender>

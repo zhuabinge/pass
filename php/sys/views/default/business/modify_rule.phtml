@@ -1,0 +1,111 @@
+{include file='before_body.phtml'}
+<body class='contrast-fb without-footer'>
+  {include file='header.phtml'}
+  <div id='wrapper'>
+    {include file='sidebar.phtml' navigation='system'}
+    <section id='content'>
+      <div class='container'>
+        <div class='row' id='content-wrapper'>
+          <div class='col-xs-12'>
+            <div class='row'>
+              <div class='col-sm-12'>
+                <div class='box'>
+                  <div class='box-header'>
+                    <div class='title'>
+                      <div class='icon-edit'></div>
+                      修改Rule
+                    </div>
+                    <div class='actions'>
+                      <a class="btn box-remove btn-xs btn-link" href=""><i class='icon-remove'></i>
+                      </a>
+                      <a class="btn box-collapse btn-xs btn-link" href=""><i></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div>
+                   <form id='modifyrule' action="{url('business/addHttpRule')}" method="post" class="form form-horizontal" style="margin-bottom: 0;" accept-charset="UTF-8">
+                    <input type="hidden" name="type" value="1">
+                    <input type="hidden" name="do_id" value="{$set['do_id']}">
+                    <input type="hidden" name="rule_id" value="{$set['rule_id']}">
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">detail:</label>
+                      <div class='row'>
+                        <div class='col-md-9'>
+                          <div class='box bordered-box' style='margin-bottom:0;'>
+                            <div class='box-content box-no-padding'>
+                              <div class='responsive-table' id="modify" style="display:block">
+
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top:15px;">
+                      <div class='col-md-10 col-md-offset-2'>
+                        <button class="btn-xs btn btn-contrast" id="addDetail">再加一项</button>
+                        <button class="btn-xs btn btn-danger" id="delDetail">删除</button>
+                      </div>
+                    </div>
+                  </form>
+                  <div class='form-actions form-actions-padding-sm'>
+                    <div class='row'>
+                      <div class='col-md-10 col-md-offset-2'>
+                        <button class='btn btn-primary' type='button' onclick='checkRule()'>修改</button>
+                        <button class='btn' type='reset'>取消</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {include file='footer.phtml'}
+  </div>
+</section>
+</div>
+</body>
+{include file='after_body.phtml'}
+<script type="text/javascript">
+function getRule(id1, id2)
+{
+  var url = "{url('business/getRule?do_id=')}" + id1 + '&rule_id=' + id2 +'&range=1';
+  $('#modify').load(url);
+}
+getRule({$set['do_id']}, {$set['rule_id']});
+
+function checkRule() {
+  var url = $('.url').val();
+  var cookies = $('.cookies').val();
+  var referer = $('.referer').val();
+  if (url == '' || cookies == '' || referer == '') {
+    alert('url或cookies或referer不能为空.');
+  } else {
+    for (i = 0; i <  $('.orders').length ; i++) {
+      var flag1 = false;
+      var flag2 = false;
+      for (j = i + 1; j <  $('.orders').length; j++) {
+        if ($('.orders')[i].value == $('.orders')[j].value) {
+          flag1 = true;
+          break;
+        }
+      }
+      if (flag1) {
+        flag2 = true;
+        break;
+      }
+    }
+    if (flag2) {
+      alert('order重复,请输入其他未被使用的order');
+    } else {
+      document.getElementById('modifyrule').submit();
+    }
+  }
+}
+</script>
+</html>
